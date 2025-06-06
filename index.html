@@ -1,424 +1,611 @@
+
+<!--
+==============================
+  AJUSTE: Inputs amplos (valor/mês)
+  Visual premium, inputs largos!
+==============================
+-->
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simulador de Juros Compostos Avançado</title>
-    <style>
-        body {
-            font-family: 'Inter', Arial, sans-serif;
-            background: #f5f5f5;
-            margin: 0;
-            padding: 0;
-        }
-        .container {
-            background: #fff;
-            max-width: 740px;
-            margin: 30px auto 0;
-            border-radius: 16px;
-            box-shadow: 0 2px 16px #0001;
-            padding: 32px;
-        }
-        h1 {
-            font-size: 1.6rem;
-            margin-bottom: 24px;
-            font-weight: 700;
-            letter-spacing: -1px;
-            color: #222;
-        }
-        label {
-            font-size: 1rem;
-            font-weight: 500;
-            margin-bottom: 5px;
-            display: block;
-        }
-        input[type="number"] {
-            padding: 7px 10px;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            font-size: 1.1rem;
-            margin-bottom: 8px;
-            width: 140px;
-        }
-        input[type="number"]:focus {
-            outline: 1.5px solid #5f75e4;
-        }
-        select {
-            padding: 7px 10px;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            font-size: 1.1rem;
-            margin-bottom: 8px;
-            width: 120px;
-        }
-        .aportes-anuais {
-            margin-bottom: 16px;
-            padding: 12px 0;
-        }
-        .aportes-anuais label {
-            display: inline-block;
-            margin-right: 14px;
-        }
-        .row {
-            display: flex;
-            gap: 18px;
-            align-items: end;
-            flex-wrap: wrap;
-        }
-        .btn {
-            padding: 8px 18px;
-            border-radius: 8px;
-            border: none;
-            font-size: 1rem;
-            background: #222;
-            color: #fff;
-            cursor: pointer;
-            margin-top: 8px;
-        }
-        .btn-outline {
-            background: none;
-            color: #222;
-            border: 1px solid #aaa;
-            margin-left: 8px;
-        }
-        .result {
-            margin-top: 34px;
-            background: #fafbfc;
-            padding: 20px 20px 12px;
-            border-radius: 14px;
-            box-shadow: 0 1px 6px #0002;
-        }
-        .resumo-cards {
-            display: flex;
-            gap: 16px;
-            flex-wrap: wrap;
-            margin-bottom: 14px;
-        }
-        .resumo-card {
-            flex: 1;
-            min-width: 160px;
-            background: #f3f6ff;
-            border-radius: 10px;
-            padding: 13px 10px;
-            box-shadow: 0 1px 3px #0001;
-            text-align: center;
-        }
-        .resumo-card span {
-            font-size: 1.2rem;
-            font-weight: 600;
-            color: #284fa4;
-        }
-        .table-wrap {
-            max-height: 280px;
-            overflow: auto;
-            margin-top: 10px;
-        }
-        table {
-            border-collapse: collapse;
-            width: 100%;
-            font-size: 0.99rem;
-        }
-        th, td {
-            border: 1px solid #eaeaea;
-            padding: 7px 8px;
-            text-align: right;
-        }
-        th {
-            background: #f0f4ff;
-            font-weight: 700;
-            color: #28365f;
-        }
-        td:first-child, th:first-child {
-            text-align: center;
-        }
-        @media (max-width: 750px) {
-            .container {
-                padding: 14px;
-                margin: 0;
-                border-radius: 0;
-            }
-            .resumo-cards {
-                flex-direction: column;
-            }
-        }
-        .remove-ano-btn, .remove-extra-btn {
-            color: #b32d2d;
-            background: #fff0f0;
-            border: 1px solid #f1cccc;
-            border-radius: 7px;
-            padding: 2px 8px;
-            font-size: 1rem;
-            cursor: pointer;
-            margin-left: 5px;
-            vertical-align: middle;
-        }
-        .aportes-extras-wrap {
-            margin: 16px 0 6px 0;
-            padding: 10px 0 0 0;
-            border-top: 1px solid #e4e8f5;
-        }
-        .extra-row {
-            display: flex;
-            align-items: end;
-            gap: 10px;
-            margin-bottom: 7px;
-        }
-        .extra-row label {
-            font-size: 0.98rem;
-            font-weight: 400;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Simulador de Juros Compostos</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap">
+  <style>
+    @font-face {
+      font-family: 'SF Pro Display';
+      src: local('SF Pro Display'), url('https://fonts.cdnfonts.com/s/20928/SFPRODISPLAYREGULAR.woff') format('woff');
+      font-weight: 400;
+      font-style: normal;
+      font-display: swap;
+    }
+    :root {
+      --bg: #fff;
+      --cinza-escuro: #23272d;
+      --chumbo: #181a1c;
+      --cinza-medio: #43474d;
+      --cinza-card: #f8f9fb;
+      --cinza-claro: #ededed;
+      --borda: #e4e4e4;
+      --verde: #19a851;
+      --vermelho: #d72d2a;
+      --laranja: #ffb000;
+      --input-bg: #f9f9fa;
+      --input-border: #cdced1;
+      --input-focus: #6f7b93;
+      --shadow: 0 2px 24px #18192014;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--cinza-escuro);
+      font-family: 'SF Pro Display', 'Inter', 'Segoe UI', 'Roboto', Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+    }
+
+    .container {
+      max-width: 790px;
+      margin: 44px auto 0;
+      background: var(--bg);
+      border-radius: 24px;
+      box-shadow: var(--shadow);
+      padding: 46px 36px 36px 36px;
+      border: 1px solid var(--borda);
+    }
+
+    @media (max-width: 900px) {
+      .container { padding: 16px 2vw 20px 2vw; border-radius: 0; }
+      h1 { font-size: 1.26rem; }
+    }
+
+    h1 {
+      font-size: 2.09rem;
+      font-weight: 700;
+      color: var(--chumbo);
+      margin: 0 0 24px 0;
+      letter-spacing: -1.3px;
+      text-align: center;
+      font-family: inherit;
+    }
+
+    .bloco {
+      background: var(--cinza-card);
+      border-radius: 15px;
+      margin-bottom: 30px;
+      padding: 26px 26px 13px 26px;
+      border: 1px solid var(--borda);
+      box-shadow: 0 2px 10px #1a1c1f10;
+    }
+    .bloco:last-child { margin-bottom: 0; }
+    .bloco-title {
+      font-size: 1.18rem;
+      font-weight: 700;
+      color: var(--cinza-escuro);
+      margin-bottom: 20px;
+      letter-spacing: -0.5px;
+    }
+
+    .linha-inputs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 30px;
+      margin-bottom: 14px;
+    }
+    .campo {
+      display: flex;
+      flex-direction: column;
+      min-width: 160px;
+      flex: 1 1 185px;
+      margin-bottom: 6px;
+    }
+    label {
+      font-size: 1.04rem;
+      font-weight: 600;
+      color: var(--cinza-medio);
+      margin-bottom: 7px;
+      margin-left: 2px;
+      letter-spacing: 0.01em;
+      font-family: inherit;
+    }
+    input[type="number"], select {
+      font-size: 1.17rem;
+      padding: 12px 14px;
+      border-radius: 12px;
+      background: var(--input-bg);
+      border: 1.5px solid var(--input-border);
+      transition: border .18s, box-shadow .15s;
+      color: var(--cinza-escuro);
+      outline: none;
+      font-family: inherit;
+      margin-bottom: 2px;
+      box-sizing: border-box;
+      width: 100%;
+      max-width: 100%;
+    }
+    input[type="number"]:focus, select:focus {
+      border-color: var(--input-focus);
+      box-shadow: 0 0 0 2px #b6cef655;
+    }
+    /* Faixas de aporte */
+    .faixas-aporte-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 10px;
+    }
+    .faixas-aporte-table th, .faixas-aporte-table td {
+      border: 1px solid var(--borda);
+      padding: 8px 10px;
+      text-align: center;
+      font-size: 1.05rem;
+      background: #fff;
+      font-family: inherit;
+    }
+    .faixas-aporte-table th {
+      background: var(--cinza-claro);
+      font-weight: 700;
+      color: var(--chumbo);
+      position: sticky;
+      top: 0;
+      z-index: 2;
+      box-shadow: 0 2px 8px #1a1c1f13;
+    }
+    .faixas-aporte-table td.remover {
+      width: 46px;
+    }
+    .btn-remover {
+      font-size: 1.22rem;
+      color: var(--vermelho);
+      background: #fff0f0;
+      border: 1px solid #ffd6d6;
+      border-radius: 7px;
+      padding: 2px 7px;
+      cursor: pointer;
+      transition: background .13s;
+    }
+    .btn-remover:hover { background: #ffeaea; }
+    /* Aportes extras */
+    .extra-row {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      margin-bottom: 8px;
+      flex-wrap: wrap;
+    }
+    .extra-row label {
+      min-width: 40px;
+    }
+    .extra-row input[type="number"] {
+      width: 200px !important;
+      max-width: 300px;
+    }
+    .btn-remover-extra {
+      font-size: 1.14rem;
+      color: var(--vermelho);
+      background: #fff0f0;
+      border: 1px solid #ffd6d6;
+      border-radius: 7px;
+      padding: 2px 9px;
+      cursor: pointer;
+      margin-left: 2px;
+      transition: background .13s;
+    }
+    .btn-remover-extra:hover { background: #ffeaea; }
+    /* Botões principais */
+    .acoes {
+      display: flex;
+      gap: 18px;
+      justify-content: center;
+      margin: 32px 0 16px 0;
+    }
+    .btn {
+      padding: 13px 32px;
+      border-radius: 11px;
+      border: none;
+      font-size: 1.12rem;
+      background: var(--chumbo);
+      color: #fff;
+      font-weight: 700;
+      cursor: pointer;
+      letter-spacing: 0.01em;
+      transition: background .13s, box-shadow .13s;
+      box-shadow: 0 2px 10px #1012170a;
+      font-family: inherit;
+    }
+    .btn:hover {
+      background: var(--cinza-escuro);
+    }
+    .btn-outline {
+      background: none;
+      color: var(--cinza-escuro);
+      border: 1.4px solid var(--cinza-medio);
+      font-weight: 700;
+      transition: background .14s, color .14s;
+      font-family: inherit;
+    }
+    .btn-outline:hover {
+      background: var(--cinza-claro);
+      color: var(--chumbo);
+    }
+    /* Cards de resumo */
+    .resumo-cards {
+      display: flex;
+      gap: 22px;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      margin-bottom: 15px;
+      margin-top: 14px;
+    }
+    .resumo-card {
+      flex: 1 1 180px;
+      background: var(--cinza-escuro);
+      color: #fff;
+      border-radius: 13px;
+      padding: 21px 16px 16px 16px;
+      box-shadow: 0 2px 10px #1819200a;
+      text-align: center;
+      font-weight: 600;
+      font-size: 1.10rem;
+      position: relative;
+      font-family: inherit;
+    }
+    .resumo-card span {
+      display: block;
+      margin-top: 11px;
+      font-size: 1.38rem;
+      font-weight: 700;
+      letter-spacing: -1.1px;
+      font-family: inherit;
+    }
+    .resumo-card.verde span { color: var(--verde); }
+    .resumo-card.vermelho span { color: var(--vermelho); }
+    .resumo-card.laranja span { color: var(--laranja); }
+    /* Tabela de resultado */
+    .table-wrap {
+      max-height: 340px;
+      overflow: auto;
+      margin-top: 13px;
+      border-radius: 11px;
+      box-shadow: 0 1px 4px #18192013;
+      background: var(--cinza-claro);
+      padding: 8px 0 3px 0;
+      position: relative;
+    }
+    .table-wrap table {
+      border-collapse: collapse;
+      width: 100%;
+      font-size: 1.04rem;
+      background: transparent;
+      font-family: inherit;
+    }
+    th, td {
+      border: 1px solid #e6e6e6;
+      padding: 8px 12px;
+      text-align: right;
+      font-family: inherit;
+    }
+    th {
+      background: var(--cinza-escuro);
+      color: #fff;
+      font-weight: 600;
+      position: sticky;
+      top: 0;
+      z-index: 3;
+      box-shadow: 0 3px 8px #1012171a;
+      text-align: center;
+      font-family: inherit;
+    }
+    tr:nth-child(even) td { background: #f5f5f7; }
+    tr:nth-child(odd) td { background: #fff; }
+    td:first-child, th:first-child { text-align: center; }
+    td.positivo { color: var(--verde); }
+    td.negativo { color: var(--vermelho); }
+    td.laranja { color: var(--laranja); }
+    @media (max-width: 800px) {
+      .container { padding: 7px 2vw 8px 2vw; border-radius: 0; }
+      h1 { font-size: 1.09rem; }
+      .resumo-cards { flex-direction: column; gap: 14px; }
+      .linha-inputs { gap: 12px; }
+      .campo { min-width: 110px; }
+      .bloco { padding: 12px 5px 8px 5px; }
+      .table-wrap { max-height: 230px; }
+      .resumo-card { padding: 14px 7px 10px 7px; font-size: .96rem;}
+      .resumo-card span { font-size: 1.14rem;}
+      .faixas-aporte-table th, .faixas-aporte-table td { font-size: .92rem; }
+      th, td { padding: 7px 5px;}
+      .extra-row input[type="number"] { width: 100% !important; min-width: 70px; max-width: 180px;}
+    }
+  </style>
 </head>
 <body>
-<div class="container">
-    <h1>Simulador de Juros Compostos Avançado</h1>
-    <div class="row" style="margin-bottom:12px;">
-        <div>
-            <label>Valor Inicial (R$)</label>
-            <input id="valor-inicial" type="number" min="0" step="0.01" autocomplete="off">
-        </div>
-        <div>
-            <label>Taxa de Juros (%)</label>
-            <input id="taxa-juros" type="number" min="0" step="0.01" autocomplete="off">
-        </div>
-        <div>
-            <label>Período (anos)</label>
-            <input id="anos" type="number" min="1" value="1" step="1" autocomplete="off">
-        </div>
-        <div>
-            <label>Tipo de Taxa</label>
-            <select id="tipo-taxa">
-                <option value="anual" selected>Anual</option>
-                <option value="mensal">Mensal</option>
-            </select>
-        </div>
-    </div>
-    <div class="aportes-anuais" id="aportes-anuais"></div>
-    <button class="btn" onclick="adicionarAno()">+ Adicionar Ano de Aporte</button>
+  <div class="container">
+    <h1>Simulador de Juros Compostos</h1>
 
-    <!-- Aportes Extras -->
-    <div class="aportes-extras-wrap" id="aportes-extras-wrap">
-        <label style="margin-bottom: 6px;">Aportes Extras:</label>
-        <div id="aportes-extras"></div>
-        <button class="btn btn-outline" style="margin-top:6px;" onclick="adicionarAporteExtra()">+ Adicionar Aporte Extra</button>
-        <span style="font-size:0.95em;color:#888;margin-left:8px;">
-            (Escolha o mês e o valor. Ex: mês 13 = 1º mês do 2º ano)
-        </span>
+    <!-- Dados iniciais -->
+    <div class="bloco">
+      <div class="bloco-title">1. Dados Iniciais</div>
+      <div class="linha-inputs">
+        <div class="campo">
+          <label for="valor-inicial">Valor inicial (R$)</label>
+          <input id="valor-inicial" type="number" min="0" step="0.01" autocomplete="off" />
+        </div>
+        <div class="campo">
+          <label for="periodo">Período (meses)</label>
+          <input id="periodo" type="number" min="1" step="1" value="1" autocomplete="off" />
+        </div>
+        <div class="campo">
+          <label for="taxa-juros">Taxa de juros (%)</label>
+          <input id="taxa-juros" type="number" min="0" step="0.01" autocomplete="off" />
+        </div>
+        <div class="campo">
+          <label for="tipo-taxa">Tipo de taxa</label>
+          <select id="tipo-taxa">
+            <option value="anual" selected>Anual</option>
+            <option value="mensal">Mensal</option>
+          </select>
+        </div>
+      </div>
     </div>
-    <!-- Fim Aportes Extras -->
 
-    <button class="btn" onclick="calcular()">Calcular</button>
-    <button class="btn btn-outline" onclick="limparCampos()">Limpar</button>
+    <!-- Faixas de aporte -->
+    <div class="bloco">
+      <div class="bloco-title">2. Aportes por Período</div>
+      <table class="faixas-aporte-table" id="faixas-aporte-table">
+        <thead>
+          <tr>
+            <th>De (mês)</th>
+            <th>Até (mês)</th>
+            <th>Valor do aporte (R$)</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody id="faixas-aporte-body">
+        </tbody>
+      </table>
+      <button class="btn btn-outline" onclick="adicionarFaixaAporte()">+ Adicionar faixa de aporte</button>
+    </div>
+
+    <!-- Aportes extras -->
+    <div class="bloco">
+      <div class="bloco-title">3. Aportes Extras (Opcional)</div>
+      <div id="aportes-extras"></div>
+      <button class="btn btn-outline" onclick="adicionarAporteExtra()">+ Adicionar aporte extra</button>
+      <span style="font-size:0.97em;color:#888;margin-left:8px;display:block;margin-top:10px;">
+        Use para inserir valores extras em meses específicos.
+      </span>
+    </div>
+
+    <div class="acoes">
+      <button class="btn" onclick="calcular()">Calcular</button>
+      <button class="btn btn-outline" onclick="limparCampos()">Limpar</button>
+    </div>
     <div class="result" id="resultado" style="display:none;"></div>
-</div>
+  </div>
 
 <script>
-let anosAporte = 1;
+let faixasAporte = [
+  { id: 1, de: 1, ate: 1, valor: '' }
+];
+let faixasId = 2;
+
+let aportesExtras = [];
 let extraId = 1;
-let aportesExtras = []; // {id, mes, valor}
 
-function criarInputsAporte() {
-    const container = document.getElementById('aportes-anuais');
-    container.innerHTML = '';
-    for (let i = 1; i <= anosAporte; i++) {
-        const div = document.createElement('div');
-        div.style.display = 'inline-block';
-        div.style.marginRight = '12px';
-        div.style.marginBottom = '8px';
-        div.innerHTML = `
-            <label>Aporte ano ${i} (R$):
-                ${anosAporte > 1 ? `<button class="remove-ano-btn" onclick="removerAno(event, ${i})" title="Remover ano">×</button>` : ''}
-            </label>
-            <input type="number" id="aporte-ano-${i}" min="0" step="0.01" autocomplete="off">
-        `;
-        container.appendChild(div);
-    }
+function renderFaixasAporte() {
+  const tbody = document.getElementById('faixas-aporte-body');
+  tbody.innerHTML = '';
+  for (let faixa of faixasAporte) {
+    tbody.innerHTML += `
+      <tr>
+        <td>
+          <input type="number" min="1" value="${faixa.de}" style="width:100%;"
+            onchange="atualizaFaixaAporte(${faixa.id}, 'de', this.value)" />
+        </td>
+        <td>
+          <input type="number" min="${faixa.de}" value="${faixa.ate}" style="width:100%;"
+            onchange="atualizaFaixaAporte(${faixa.id}, 'ate', this.value)" />
+        </td>
+        <td>
+          <input type="number" min="0" step="0.01" value="${faixa.valor}" style="width:100%;"
+            onchange="atualizaFaixaAporte(${faixa.id}, 'valor', this.value)" />
+        </td>
+        <td class="remover">
+          ${faixasAporte.length > 1 ? `<button class="btn-remover" title="Remover" onclick="removerFaixaAporte(${faixa.id})">&times;</button>` : ''}
+        </td>
+      </tr>
+    `;
+  }
 }
-criarInputsAporte();
+renderFaixasAporte();
 
-function adicionarAno() {
-    anosAporte++;
-    document.getElementById('anos').value = anosAporte;
-    criarInputsAporte();
+function adicionarFaixaAporte() {
+  // Preencher de forma intuitiva: começa do mês seguinte ao último
+  let ultimo = faixasAporte[faixasAporte.length - 1];
+  let novoDe = parseInt(ultimo.ate) + 1;
+  let novoAte = novoDe;
+  faixasAporte.push({ id: faixasId++, de: novoDe, ate: novoAte, valor: '' });
+  renderFaixasAporte();
 }
 
-function removerAno(event, idx) {
-    event.preventDefault();
-    if (anosAporte === 1) return;
-    const inputAno = document.getElementById('aporte-ano-' + idx);
-    inputAno.parentElement.parentElement.remove();
-    let novosInputs = [];
-    for (let i = 1; i <= anosAporte; i++) {
-        let el = document.getElementById('aporte-ano-' + i);
-        if (el) novosInputs.push(el.value);
-    }
-    anosAporte--;
-    document.getElementById('anos').value = anosAporte;
-    criarInputsAporte();
-    for (let i = 1; i <= novosInputs.length; i++) {
-        document.getElementById('aporte-ano-' + i).value = novosInputs[i-1];
-    }
+function removerFaixaAporte(id) {
+  faixasAporte = faixasAporte.filter(f => f.id !== id);
+  renderFaixasAporte();
+}
+function atualizaFaixaAporte(id, campo, valor) {
+  let faixa = faixasAporte.find(f => f.id === id);
+  if (!faixa) return;
+  if (campo === 'de') {
+    faixa.de = Math.max(1, parseInt(valor) || 1);
+    if (faixa.ate < faixa.de) faixa.ate = faixa.de;
+  } else if (campo === 'ate') {
+    faixa.ate = Math.max(faixa.de, parseInt(valor) || faixa.de);
+  } else if (campo === 'valor') {
+    faixa.valor = parseFloat(valor) || '';
+  }
+  renderFaixasAporte();
 }
 
 // --------- Aportes Extras ---------
-function atualizarAportesExtras() {
-    const div = document.getElementById('aportes-extras');
-    div.innerHTML = '';
-    aportesExtras.forEach(extra => {
-        const row = document.createElement('div');
-        row.className = 'extra-row';
-        row.innerHTML = `
-            <label>Mês:</label>
-            <input type="number" min="1" max="${anosAporte*12}" value="${extra.mes}" style="width:55px;" onchange="atualizaExtra(${extra.id}, 'mes', this.value)">
-            <label>Valor (R$):</label>
-            <input type="number" min="0" step="0.01" value="${extra.valor}" style="width:90px;" onchange="atualizaExtra(${extra.id}, 'valor', this.value)">
-            <button class="remove-extra-btn" onclick="removerAporteExtra(${extra.id})" title="Remover">×</button>
-        `;
-        div.appendChild(row);
-    });
+function renderAportesExtras() {
+  const div = document.getElementById('aportes-extras');
+  div.innerHTML = '';
+  for (let extra of aportesExtras) {
+    div.innerHTML += `
+      <div class="extra-row">
+        <label>Mês:</label>
+        <input type="number" min="1" value="${extra.mes}">
+        <label>Valor (R$):</label>
+        <input type="number" min="0" step="0.01" value="${extra.valor}">
+        <button class="btn-remover-extra" onclick="removerAporteExtra(${extra.id})" title="Remover">×</button>
+      </div>
+    `;
+  }
 }
+renderAportesAportesExtras();
 
 function adicionarAporteExtra() {
-    aportesExtras.push({id: extraId++, mes: '', valor: ''});
-    atualizarAportesExtras();
+  aportesExtras.push({ id: extraId++, mes: '', valor: '' });
+  renderAportesExtras();
 }
-
 function removerAporteExtra(id) {
-    aportesExtras = aportesExtras.filter(extra => extra.id !== id);
-    atualizarAportesExtras();
+  aportesExtras = aportesExtras.filter(e => e.id !== id);
+  renderAportesExtras();
+}
+function atualizaAporteExtra(id, campo, valor) {
+  let idx = aportesExtras.findIndex(e => e.id === id);
+  if (idx !== -1) {
+    aportesExtras[idx][campo] = campo === 'mes' ? parseInt(valor) : parseFloat(valor);
+  }
+  renderAportesExtras();
 }
 
-function atualizaExtra(id, campo, valor) {
-    let idx = aportesExtras.findIndex(e => e.id === id);
-    if (idx !== -1) {
-        aportesExtras[idx][campo] = campo === 'mes' ? parseInt(valor) : parseFloat(valor);
-    }
-}
-
-// ----------------------------------
-
-document.getElementById('anos').addEventListener('change', function() {
-    let val = parseInt(this.value) || 1;
-    if (val < 1) val = 1;
-    anosAporte = val;
-    criarInputsAporte();
-    atualizarAportesExtras();
-});
-
+// ----------- Limpar campos -----------
 function limparCampos() {
-    document.getElementById('valor-inicial').value = '';
-    document.getElementById('taxa-juros').value = '';
-    document.getElementById('anos').value = 1;
-    anosAporte = 1;
-    criarInputsAporte();
-    aportesExtras = [];
-    atualizarAportesExtras();
-    document.getElementById('resultado').style.display = "none";
+  document.getElementById('valor-inicial').value = '';
+  document.getElementById('periodo').value = 1;
+  document.getElementById('taxa-juros').value = '';
+  document.getElementById('tipo-taxa').value = 'anual';
+
+  faixasAporte = [
+    { id: 1, de: 1, ate: 1, valor: '' }
+  ];
+  faixasId = 2;
+  renderFaixasAporte();
+
+  aportesExtras = [];
+  extraId = 1;
+  renderAportesExtras();
+
+  document.getElementById('resultado').style.display = "none";
 }
 
+// --------------- Cálculo --------------
 function calcular() {
-    const valorInicial = parseFloat(document.getElementById('valor-inicial').value) || 0;
-    const taxa = parseFloat(document.getElementById('taxa-juros').value);
-    const anos = parseInt(document.getElementById('anos').value) || 1;
-    const tipoTaxa = document.getElementById('tipo-taxa').value;
+  const valorInicial = parseFloat(document.getElementById('valor-inicial').value) || 0;
+  const periodo = parseInt(document.getElementById('periodo').value) || 1;
+  const taxa = parseFloat(document.getElementById('taxa-juros').value);
+  const tipoTaxa = document.getElementById('tipo-taxa').value;
 
-    if (isNaN(taxa) || taxa <= 0) {
-        alert('Digite uma taxa de juros válida!');
-        return;
+  if (isNaN(taxa) || taxa <= 0) {
+    alert('Digite uma taxa de juros válida!');
+    return;
+  }
+
+  // Preparar vetor de aporte mensal para cada mês
+  let aportesPorMes = Array(periodo+1).fill(0); // do mês 1 ao período
+  for (let faixa of faixasAporte) {
+    if (!faixa.valor) continue;
+    let de = Math.max(1, parseInt(faixa.de));
+    let ate = Math.min(periodo, parseInt(faixa.ate));
+    let valor = parseFloat(faixa.valor) || 0;
+    for (let m = de; m <= ate; m++) {
+      aportesPorMes[m] = valor;
     }
-
-    let aportes = [];
-    for (let i = 1; i <= anosAporte; i++) {
-        let v = parseFloat(document.getElementById(`aporte-ano-${i}`).value) || 0;
-        aportes.push(v);
+  }
+  // Somar aportes extras
+  for (let extra of aportesExtras) {
+    if (extra.mes && extra.valor && extra.mes >= 1 && extra.mes <= periodo) {
+      aportesPorMes[extra.mes] += parseFloat(extra.valor);
     }
+  }
 
-    // Cálculo da taxa mensal
-    let taxaMensal = 0;
-    if (tipoTaxa === "anual") {
-        taxaMensal = Math.pow(1 + taxa/100, 1/12) - 1;
-    } else {
-        taxaMensal = taxa/100;
-    }
+  // Cálculo da taxa mensal
+  let taxaMensal = 0;
+  if (tipoTaxa === "anual") {
+    taxaMensal = Math.pow(1 + taxa/100, 1/12) - 1;
+  } else {
+    taxaMensal = taxa/100;
+  }
 
-    let meses = anosAporte * 12;
-    let acumulado = valorInicial;
-    let totalInvestido = valorInicial;
-    let totalJuros = 0;
+  let acumulado = valorInicial;
+  let totalInvestido = valorInicial;
+  let totalJuros = 0;
 
-    // Mapeia aportes extras por mês para acesso rápido
-    let extrasMap = {};
-    for (const ex of aportesExtras) {
-        if (ex.mes && ex.valor && ex.mes >=1 && ex.mes <= meses) {
-            extrasMap[ex.mes] = (extrasMap[ex.mes] || 0) + parseFloat(ex.valor);
-        }
-    }
+  let tabela = [];
+  tabela.push({mes: 0, jurosMes: 0, totalInvestido: valorInicial, totalJuros: 0, acumulado: valorInicial});
 
-    let tabela = [];
-    tabela.push({mes: 0, jurosMes: 0, totalInvestido: valorInicial, totalJuros: 0, acumulado: valorInicial});
+  for (let m = 1; m <= periodo; m++) {
+    let aporteMes = aportesPorMes[m] || 0;
 
-    for (let m = 1; m <= meses; m++) {
-        let anoAtual = Math.ceil(m / 12);
-        let aporteMes = aportes[anoAtual-1] || 0;
-        let aporteExtraMes = extrasMap[m] || 0;
+    // Juros sobre saldo anterior
+    let jurosMes = acumulado * taxaMensal;
+    acumulado += jurosMes;
 
-        // Juros sobre saldo anterior
-        let jurosMes = acumulado * taxaMensal;
-        acumulado += jurosMes;
+    // Aportes fixos + extras do mês
+    acumulado += aporteMes;
+    totalInvestido += aporteMes;
+    totalJuros = acumulado - totalInvestido;
 
-        // Aportes (fixo do ano + extra se houver)
-        acumulado += aporteMes + aporteExtraMes;
-        totalInvestido += aporteMes + aporteExtraMes;
-        totalJuros = acumulado - totalInvestido;
+    tabela.push({
+      mes: m,
+      jurosMes: jurosMes,
+      totalInvestido: totalInvestido,
+      totalJuros: totalJuros,
+      acumulado: acumulado
+    });
+  }
 
-        tabela.push({
-            mes: m,
-            jurosMes: jurosMes,
-            totalInvestido: totalInvestido,
-            totalJuros: totalJuros,
-            acumulado: acumulado
-        });
-    }
-
-    // HTML dos resultados
-    let resHTML = `
-        <div class="resumo-cards">
-            <div class="resumo-card">Total em Juros<br><span>R$ ${tabela[meses].totalJuros.toLocaleString('pt-BR', {minimumFractionDigits:2})}</span></div>
-            <div class="resumo-card">Total Investido<br><span>R$ ${tabela[meses].totalInvestido.toLocaleString('pt-BR', {minimumFractionDigits:2})}</span></div>
-            <div class="resumo-card">Total Final<br><span>R$ ${tabela[meses].acumulado.toLocaleString('pt-BR', {minimumFractionDigits:2})}</span></div>
-        </div>
-        <div class="table-wrap">
-            <table>
-                <thead>
-                    <tr>
-                        <th>Meses</th>
-                        <th>Juros</th>
-                        <th>Total Investido</th>
-                        <th>Total Juros</th>
-                        <th>Acumulado</th>
-                    </tr>
-                </thead>
-                <tbody>
-    `;
-    for (let i = 0; i < tabela.length; i++) {
-        resHTML += `
-            <tr>
-                <td>${tabela[i].mes}</td>
-                <td>R$ ${tabela[i].jurosMes.toLocaleString('pt-BR', {minimumFractionDigits:2})}</td>
-                <td>R$ ${tabela[i].totalInvestido.toLocaleString('pt-BR', {minimumFractionDigits:2})}</td>
-                <td>R$ ${tabela[i].totalJuros.toLocaleString('pt-BR', {minimumFractionDigits:2})}</td>
-                <td>R$ ${tabela[i].acumulado.toLocaleString('pt-BR', {minimumFractionDigits:2})}</td>
-            </tr>
-        `;
-    }
-    resHTML += `
-                </tbody>
-            </table>
-        </div>
-    `;
-    let resultado = document.getElementById('resultado');
-    resultado.innerHTML = resHTML;
-    resultado.style.display = "block";
+  // HTML dos resultados
+  let resHTML = `
+      <div class="resumo-cards">
+          <div class="resumo-card verde">Total em Juros<br><span>R$ ${tabela[periodo].totalJuros.toLocaleString('pt-BR', {minimumFractionDigits:2})}</span></div>
+          <div class="resumo-card laranja">Total Investido<br><span>R$ ${tabela[periodo].totalInvestido.toLocaleString('pt-BR', {minimumFractionDigits:2})}</span></div>
+          <div class="resumo-card">Total Final<br><span>R$ ${tabela[periodo].acumulado.toLocaleString('pt-BR', {minimumFractionDigits:2})}</span></div>
+      </div>
+      <div class="table-wrap">
+          <table>
+              <thead>
+                  <tr>
+                      <th>Mês</th>
+                      <th>Juros</th>
+                      <th>Total Investido</th>
+                      <th>Total Juros</th>
+                      <th>Acumulado</th>
+                  </tr>
+              </thead>
+              <tbody>
+  `;
+  for (let i = 0; i < tabela.length; i++) {
+      resHTML += `
+          <tr>
+              <td>${tabela[i].mes}</td>
+              <td class="${tabela[i].jurosMes >= 0 ? 'positivo' : 'negativo'}">R$ ${tabela[i].jurosMes.toLocaleString('pt-BR', {minimumFractionDigits:2})}</td>
+              <td class="laranja">R$ ${tabela[i].totalInvestido.toLocaleString('pt-BR', {minimumFractionDigits:2})}</td>
+              <td class="${tabela[i].totalJuros >= 0 ? 'positivo' : 'negativo'}">R$ ${tabela[i].totalJuros.toLocaleString('pt-BR', {minimumFractionDigits:2})}</td>
+              <td>R$ ${tabela[i].acumulado.toLocaleString('pt-BR', {minimumFractionDigits:2})}</td>
+          </tr>
+      `;
+  }
+  resHTML += `
+              </tbody>
+          </table>
+      </div>
+  `;
+  let resultado = document.getElementById('resultado');
+  resultado.innerHTML = resHTML;
+  resultado.style.display = "block";
 }
 </script>
 </body>
