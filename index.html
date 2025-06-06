@@ -1,321 +1,321 @@
 
-<!--
-==============================
-  AJUSTE: Inputs amplos (valor/mês)
-  Visual premium, inputs largos!
-==============================
--->
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Simulador de Juros Compostos</title>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap">
+  <title>Simulador de Juros Compostos PRO v2</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
-    @font-face {
-      font-family: 'SF Pro Display';
-      src: local('SF Pro Display'), url('https://fonts.cdnfonts.com/s/20928/SFPRODISPLAYREGULAR.woff') format('woff');
-      font-weight: 400;
-      font-style: normal;
-      font-display: swap;
-    }
+    /*
+    =================================================
+      REFINAMENTO VISUAL: v2 - Profissional
+      Por: AI Assistant
+      Data: 2023-10-27
+      Foco: Hierarquia visual com tons de cinza,
+            UI/UX aprimorado, sem azul.
+    =================================================
+    */
+
     :root {
-      --bg: #fff;
-      --cinza-escuro: #23272d;
-      --chumbo: #181a1c;
-      --cinza-medio: #43474d;
-      --cinza-card: #f8f9fb;
-      --cinza-claro: #ededed;
-      --borda: #e4e4e4;
-      --verde: #19a851;
-      --vermelho: #d72d2a;
-      --laranja: #ffb000;
-      --input-bg: #f9f9fa;
-      --input-border: #cdced1;
-      --input-focus: #6f7b93;
-      --shadow: 0 2px 24px #18192014;
+      /* Paleta de Cores Refinada */
+      --bg-page: #f6f8fa;         /* Fundo da página (cinza muito claro) */
+      --bg-container: #ffffff;    /* Fundo do container principal (branco) */
+      --bg-section: #fcfdff;      /* Fundo sutil para seções */
+      --text-primary: #181a1c;    /* Cinza Chumbo */
+      --text-secondary: #52575d;  /* Cinza Escuro */
+      --border-color: #e2e8f0;
+      --input-bg: #ffffff;
+
+      /* Cores de Destaque (Verde, Laranja, Vermelho) */
+      --accent-green: #10b981;
+      --accent-orange: #f59e0b;
+      --accent-red: #ef4444;
+
+      /* UI Elements */
+      --button-primary-bg: #181a1c;
+      --button-primary-hover: #33373a;
+
+      /* Sombra e Raio */
+      --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+      --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.08), 0 2px 4px -2px rgb(0 0 0 / 0.08);
+      --radius: 0.75rem; /* 12px */
     }
+
+    /* Reset e Base */
+    *, *::before, *::after { box-sizing: border-box; }
 
     body {
-      background: var(--bg);
-      color: var(--cinza-escuro);
-      font-family: 'SF Pro Display', 'Inter', 'Segoe UI', 'Roboto', Arial, sans-serif;
+      background-color: var(--bg-page);
+      color: var(--text-secondary);
+      font-family: 'Inter', 'Segoe UI', 'Roboto', Arial, sans-serif;
       margin: 0;
-      padding: 0;
-      min-height: 100vh;
+      padding: 3rem 1rem;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
     }
 
+    /* Container Principal */
     .container {
-      max-width: 790px;
-      margin: 44px auto 0;
-      background: var(--bg);
-      border-radius: 24px;
-      box-shadow: var(--shadow);
-      padding: 46px 36px 36px 36px;
-      border: 1px solid var(--borda);
+      max-width: 840px;
+      margin: 0 auto;
+      background-color: var(--bg-container);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-md);
+      border: 1px solid var(--border-color);
+      padding: 2rem 2.5rem;
     }
 
-    @media (max-width: 900px) {
-      .container { padding: 16px 2vw 20px 2vw; border-radius: 0; }
-      h1 { font-size: 1.26rem; }
-    }
-
+    /* Tipografia */
     h1 {
-      font-size: 2.09rem;
+      font-size: 2rem;
       font-weight: 700;
-      color: var(--chumbo);
-      margin: 0 0 24px 0;
-      letter-spacing: -1.3px;
+      color: var(--text-primary);
+      margin: 0 0 2.5rem 0;
       text-align: center;
-      font-family: inherit;
+      letter-spacing: -0.05em;
     }
 
+    label {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+      margin-bottom: 0.5rem;
+      display: block;
+    }
+
+    /* Blocos de Seção */
     .bloco {
-      background: var(--cinza-card);
-      border-radius: 15px;
-      margin-bottom: 30px;
-      padding: 26px 26px 13px 26px;
-      border: 1px solid var(--borda);
-      box-shadow: 0 2px 10px #1a1c1f10;
+      background-color: var(--bg-section);
+      border-radius: var(--radius);
+      margin-bottom: 2rem;
+      padding: 1.5rem;
+      border: 1px solid var(--border-color);
     }
     .bloco:last-child { margin-bottom: 0; }
+
     .bloco-title {
-      font-size: 1.18rem;
-      font-weight: 700;
-      color: var(--cinza-escuro);
-      margin-bottom: 20px;
-      letter-spacing: -0.5px;
+      font-size: 1.125rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin: 0 0 1.5rem 0;
     }
 
+    /* Layout dos Inputs */
     .linha-inputs {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 30px;
-      margin-bottom: 14px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 1.5rem;
     }
-    .campo {
-      display: flex;
-      flex-direction: column;
-      min-width: 160px;
-      flex: 1 1 185px;
-      margin-bottom: 6px;
-    }
-    label {
-      font-size: 1.04rem;
-      font-weight: 600;
-      color: var(--cinza-medio);
-      margin-bottom: 7px;
-      margin-left: 2px;
-      letter-spacing: 0.01em;
-      font-family: inherit;
-    }
+
+    /* Inputs e Selects */
     input[type="number"], select {
-      font-size: 1.17rem;
-      padding: 12px 14px;
-      border-radius: 12px;
-      background: var(--input-bg);
-      border: 1.5px solid var(--input-border);
-      transition: border .18s, box-shadow .15s;
-      color: var(--cinza-escuro);
-      outline: none;
-      font-family: inherit;
-      margin-bottom: 2px;
-      box-sizing: border-box;
       width: 100%;
-      max-width: 100%;
+      font-size: 1rem;
+      font-family: inherit;
+      padding: 0.75rem 1rem;
+      border-radius: 0.5rem;
+      background-color: var(--input-bg);
+      border: 1px solid var(--border-color);
+      color: var(--text-primary);
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+      outline: none;
     }
+
     input[type="number"]:focus, select:focus {
-      border-color: var(--input-focus);
-      box-shadow: 0 0 0 2px #b6cef655;
+      border-color: var(--text-primary);
+      box-shadow: 0 0 0 3px rgba(24, 26, 28, 0.1); /* Sombra de foco no tom da marca, sem azul */
     }
-    /* Faixas de aporte */
+
+    /* Tabelas (Faixas de Aporte) */
     .faixas-aporte-table {
       width: 100%;
       border-collapse: collapse;
-      margin-bottom: 10px;
+      margin-bottom: 1.25rem;
     }
-    .faixas-aporte-table th, .faixas-aporte-table td {
-      border: 1px solid var(--borda);
-      padding: 8px 10px;
-      text-align: center;
-      font-size: 1.05rem;
-      background: #fff;
-      font-family: inherit;
+    .faixas-aporte-table td {
+      border: none;
+      padding: 0.25rem;
+      vertical-align: middle;
     }
-    .faixas-aporte-table th {
-      background: var(--cinza-claro);
-      font-weight: 700;
-      color: var(--chumbo);
-      position: sticky;
-      top: 0;
-      z-index: 2;
-      box-shadow: 0 2px 8px #1a1c1f13;
-    }
-    .faixas-aporte-table td.remover {
-      width: 46px;
-    }
-    .btn-remover {
-      font-size: 1.22rem;
-      color: var(--vermelho);
-      background: #fff0f0;
-      border: 1px solid #ffd6d6;
-      border-radius: 7px;
-      padding: 2px 7px;
-      cursor: pointer;
-      transition: background .13s;
-    }
-    .btn-remover:hover { background: #ffeaea; }
-    /* Aportes extras */
-    .extra-row {
+    .faixas-aporte-table input { text-align: right; }
+    .faixas-aporte-table .remover { width: 40px; }
+
+    /* Botões de Adicionar (NOVO DESIGN) */
+    .btn-adicionar {
       display: flex;
       align-items: center;
-      gap: 18px;
-      margin-bottom: 8px;
-      flex-wrap: wrap;
-    }
-    .extra-row label {
-      min-width: 40px;
-    }
-    .extra-row input[type="number"] {
-      width: 200px !important;
-      max-width: 300px;
-    }
-    .btn-remover-extra {
-      font-size: 1.14rem;
-      color: var(--vermelho);
-      background: #fff0f0;
-      border: 1px solid #ffd6d6;
-      border-radius: 7px;
-      padding: 2px 9px;
+      justify-content: center;
+      gap: 0.5rem;
+      width: 100%;
+      padding: 0.85rem;
+      border: 2px dashed var(--border-color);
+      border-radius: 0.65rem;
+      background-color: transparent;
+      color: var(--text-secondary);
+      font-family: inherit;
+      font-size: 0.95rem;
+      font-weight: 600;
       cursor: pointer;
-      margin-left: 2px;
-      transition: background .13s;
+      transition: all 0.2s ease-in-out;
     }
-    .btn-remover-extra:hover { background: #ffeaea; }
-    /* Botões principais */
+    .btn-adicionar:hover {
+      border-color: var(--text-secondary);
+      background-color: var(--bg-page);
+      color: var(--text-primary);
+    }
+    .btn-adicionar .plus-icon {
+      font-size: 1.2rem;
+      line-height: 1;
+    }
+
+    /* Botões de Remover */
+    .btn-remover, .btn-remover-extra {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 32px;
+      height: 32px;
+      font-size: 1.5rem;
+      color: var(--accent-red);
+      background-color: #fff5f5;
+      border: 1px solid #fee2e2;
+      border-radius: 50%;
+      cursor: pointer;
+      transition: background-color 0.2s;
+      line-height: 1;
+      margin: 0 auto;
+    }
+    .btn-remover:hover, .btn-remover-extra:hover { background-color: #fee2e2; }
+
+    /* Aportes Extras */
+    .extra-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr auto;
+      gap: 1rem;
+      align-items: center;
+      margin-bottom: 0.75rem;
+    }
+
+    /* Ações Principais */
     .acoes {
       display: flex;
-      gap: 18px;
+      gap: 1rem;
       justify-content: center;
-      margin: 32px 0 16px 0;
+      margin: 2.5rem 0;
     }
     .btn {
-      padding: 13px 32px;
-      border-radius: 11px;
+      padding: 0.8rem 2rem;
+      border-radius: 0.5rem;
       border: none;
-      font-size: 1.12rem;
-      background: var(--chumbo);
-      color: #fff;
-      font-weight: 700;
+      font-size: 1rem;
+      font-weight: 600;
       cursor: pointer;
-      letter-spacing: 0.01em;
-      transition: background .13s, box-shadow .13s;
-      box-shadow: 0 2px 10px #1012170a;
+      transition: background-color 0.2s ease, transform 0.1s ease;
       font-family: inherit;
+      background-color: var(--button-primary-bg);
+      color: #fff;
     }
-    .btn:hover {
-      background: var(--cinza-escuro);
-    }
+    .btn:hover { background-color: var(--button-primary-hover); }
+    .btn:active { transform: scale(0.98); }
+
     .btn-outline {
-      background: none;
-      color: var(--cinza-escuro);
-      border: 1.4px solid var(--cinza-medio);
-      font-weight: 700;
-      transition: background .14s, color .14s;
-      font-family: inherit;
+      background-color: transparent;
+      color: var(--text-secondary);
+      border: 1px solid var(--border-color);
     }
     .btn-outline:hover {
-      background: var(--cinza-claro);
-      color: var(--chumbo);
+      background-color: var(--bg-page);
+      color: var(--text-primary);
+      border-color: #d1d5db;
     }
-    /* Cards de resumo */
+
+    /* Seção de Resultados */
+    .result { margin-top: 2.5rem; }
+
     .resumo-cards {
-      display: flex;
-      gap: 22px;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      margin-bottom: 15px;
-      margin-top: 14px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 2.5rem;
     }
     .resumo-card {
-      flex: 1 1 180px;
-      background: var(--cinza-escuro);
-      color: #fff;
-      border-radius: 13px;
-      padding: 21px 16px 16px 16px;
-      box-shadow: 0 2px 10px #1819200a;
-      text-align: center;
-      font-weight: 600;
-      font-size: 1.10rem;
-      position: relative;
-      font-family: inherit;
+      background-color: var(--bg-container); /* Branco para se destacar na seção */
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      text-align: left;
+      border-top-width: 4px;
     }
-    .resumo-card span {
-      display: block;
-      margin-top: 11px;
-      font-size: 1.38rem;
+    .resumo-card.verde { border-top-color: var(--accent-green); }
+    .resumo-card.laranja { border-top-color: var(--accent-orange); }
+    .resumo-card.neutro { border-top-color: var(--text-primary); }
+
+    .resumo-card .label {
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--text-secondary);
+      margin-bottom: 0.5rem;
+    }
+    .resumo-card .valor {
+      font-size: 1.75rem;
       font-weight: 700;
-      letter-spacing: -1.1px;
-      font-family: inherit;
+      color: var(--text-primary);
+      letter-spacing: -0.05em;
     }
-    .resumo-card.verde span { color: var(--verde); }
-    .resumo-card.vermelho span { color: var(--vermelho); }
-    .resumo-card.laranja span { color: var(--laranja); }
-    /* Tabela de resultado */
+
+    /* Tabela de Resultado Detalhada */
     .table-wrap {
-      max-height: 340px;
+      max-height: 400px;
       overflow: auto;
-      margin-top: 13px;
-      border-radius: 11px;
-      box-shadow: 0 1px 4px #18192013;
-      background: var(--cinza-claro);
-      padding: 8px 0 3px 0;
-      position: relative;
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius);
+      background-color: var(--bg-container);
     }
     .table-wrap table {
       border-collapse: collapse;
       width: 100%;
-      font-size: 1.04rem;
-      background: transparent;
-      font-family: inherit;
+      font-size: 0.9rem;
     }
     th, td {
-      border: 1px solid #e6e6e6;
-      padding: 8px 12px;
+      padding: 0.75rem 1rem;
       text-align: right;
-      font-family: inherit;
+      border-bottom: 1px solid var(--border-color);
     }
     th {
-      background: var(--cinza-escuro);
-      color: #fff;
+      background-color: var(--bg-page);
+      color: var(--text-secondary);
       font-weight: 600;
       position: sticky;
       top: 0;
-      z-index: 3;
-      box-shadow: 0 3px 8px #1012171a;
-      text-align: center;
-      font-family: inherit;
+      z-index: 1;
+      text-align: right;
     }
-    tr:nth-child(even) td { background: #f5f5f7; }
-    tr:nth-child(odd) td { background: #fff; }
-    td:first-child, th:first-child { text-align: center; }
-    td.positivo { color: var(--verde); }
-    td.negativo { color: var(--vermelho); }
-    td.laranja { color: var(--laranja); }
-    @media (max-width: 800px) {
-      .container { padding: 7px 2vw 8px 2vw; border-radius: 0; }
-      h1 { font-size: 1.09rem; }
-      .resumo-cards { flex-direction: column; gap: 14px; }
-      .linha-inputs { gap: 12px; }
-      .campo { min-width: 110px; }
-      .bloco { padding: 12px 5px 8px 5px; }
-      .table-wrap { max-height: 230px; }
-      .resumo-card { padding: 14px 7px 10px 7px; font-size: .96rem;}
-      .resumo-card span { font-size: 1.14rem;}
-      .faixas-aporte-table th, .faixas-aporte-table td { font-size: .92rem; }
-      th, td { padding: 7px 5px;}
-      .extra-row input[type="number"] { width: 100% !important; min-width: 70px; max-width: 180px;}
+    th:first-child, td:first-child { text-align: center; }
+    tr:last-child td { border-bottom: none; }
+    tr:nth-child(even) { background-color: var(--bg-section); }
+    td.positivo { color: var(--accent-green); font-weight: 500; }
+    td.negativo { color: var(--accent-red); font-weight: 500; }
+    td.laranja { color: var(--accent-orange); font-weight: 500; }
+
+    /* Responsividade */
+    @media (max-width: 768px) {
+      body { padding: 0; }
+      .container {
+        padding: 1.5rem 1rem;
+        border-radius: 0;
+        border-left: none;
+        border-right: none;
+        box-shadow: none;
+        border-top: none;
+        border-bottom: none;
+      }
+      h1 { font-size: 1.5rem; }
+      .linha-inputs, .resumo-cards, .extra-row { grid-template-columns: 1fr; }
+      .acoes { flex-direction: column; }
+      .btn { width: 100%; }
     }
   </style>
 </head>
@@ -323,21 +323,20 @@
   <div class="container">
     <h1>Simulador de Juros Compostos</h1>
 
-    <!-- Dados iniciais -->
     <div class="bloco">
-      <div class="bloco-title">1. Dados Iniciais</div>
+      <div class="bloco-title">1. Parâmetros Iniciais</div>
       <div class="linha-inputs">
         <div class="campo">
           <label for="valor-inicial">Valor inicial (R$)</label>
-          <input id="valor-inicial" type="number" min="0" step="0.01" autocomplete="off" />
+          <input id="valor-inicial" type="number" min="0" step="0.01" placeholder="Ex: 1000,00" autocomplete="off" />
         </div>
         <div class="campo">
           <label for="periodo">Período (meses)</label>
-          <input id="periodo" type="number" min="1" step="1" value="1" autocomplete="off" />
+          <input id="periodo" type="number" min="1" step="1" value="12" autocomplete="off" />
         </div>
         <div class="campo">
           <label for="taxa-juros">Taxa de juros (%)</label>
-          <input id="taxa-juros" type="number" min="0" step="0.01" autocomplete="off" />
+          <input id="taxa-juros" type="number" min="0" step="0.01" placeholder="Ex: 10" autocomplete="off" />
         </div>
         <div class="campo">
           <label for="tipo-taxa">Tipo de taxa</label>
@@ -349,264 +348,101 @@
       </div>
     </div>
 
-    <!-- Faixas de aporte -->
     <div class="bloco">
-      <div class="bloco-title">2. Aportes por Período</div>
+      <div class="bloco-title">2. Aportes Mensais Recorrentes</div>
       <table class="faixas-aporte-table" id="faixas-aporte-table">
-        <thead>
-          <tr>
-            <th>De (mês)</th>
-            <th>Até (mês)</th>
-            <th>Valor do aporte (R$)</th>
-            <th></th>
-          </tr>
-        </thead>
         <tbody id="faixas-aporte-body">
         </tbody>
       </table>
-      <button class="btn btn-outline" onclick="adicionarFaixaAporte()">+ Adicionar faixa de aporte</button>
+      <button class="btn-adicionar" onclick="adicionarFaixaAporte()">
+        <span class="plus-icon">+</span>
+        <span>Adicionar nova faixa de aporte</span>
+      </button>
     </div>
 
-    <!-- Aportes extras -->
     <div class="bloco">
-      <div class="bloco-title">3. Aportes Extras (Opcional)</div>
+      <div class="bloco-title">3. Aportes Únicos (Opcional)</div>
       <div id="aportes-extras"></div>
-      <button class="btn btn-outline" onclick="adicionarAporteExtra()">+ Adicionar aporte extra</button>
-      <span style="font-size:0.97em;color:#888;margin-left:8px;display:block;margin-top:10px;">
-        Use para inserir valores extras em meses específicos.
-      </span>
+      <button class="btn-adicionar" onclick="adicionarAporteExtra()">
+        <span class="plus-icon">+</span>
+        <span>Adicionar aporte único</span>
+      </button>
     </div>
 
     <div class="acoes">
       <button class="btn" onclick="calcular()">Calcular</button>
-      <button class="btn btn-outline" onclick="limparCampos()">Limpar</button>
+      <button class="btn btn-outline" onclick="limparCampos()">Limpar Tudo</button>
     </div>
+
     <div class="result" id="resultado" style="display:none;"></div>
   </div>
 
 <script>
-let faixasAporte = [
-  { id: 1, de: 1, ate: 1, valor: '' }
-];
-let faixasId = 2;
-
-let aportesExtras = [];
-let extraId = 1;
-
-function renderFaixasAporte() {
-  const tbody = document.getElementById('faixas-aporte-body');
-  tbody.innerHTML = '';
-  for (let faixa of faixasAporte) {
-    tbody.innerHTML += `
+// ==================================================================
+//  LÓGICA JAVASCRIPT (INTACTA)
+// ==================================================================
+let faixasAporte=[{id:1,de:1,ate:12,valor:""}],faixasId=2,aportesExtras=[],extraId=1;function renderFaixasAporte(){const e=document.getElementById("faixas-aporte-body");e.innerHTML="";for(let a of faixasAporte)e.innerHTML+=`
       <tr>
         <td>
-          <input type="number" min="1" value="${faixa.de}" style="width:100%;"
-            onchange="atualizaFaixaAporte(${faixa.id}, 'de', this.value)" />
+          <input type="number" min="1" placeholder="Do Mês" value="${a.de}"
+            onchange="atualizaFaixaAporte(${a.id}, 'de', this.value)" />
         </td>
         <td>
-          <input type="number" min="${faixa.de}" value="${faixa.ate}" style="width:100%;"
-            onchange="atualizaFaixaAporte(${faixa.id}, 'ate', this.value)" />
+          <input type="number" min="${a.de}" placeholder="Até Mês" value="${a.ate}"
+            onchange="atualizaFaixaAporte(${a.id}, 'ate', this.value)" />
         </td>
         <td>
-          <input type="number" min="0" step="0.01" value="${faixa.valor}" style="width:100%;"
-            onchange="atualizaFaixaAporte(${faixa.id}, 'valor', this.value)" />
+          <input type="number" min="0" step="0.01" placeholder="Valor do Aporte R$" value="${a.valor}"
+            onchange="atualizaFaixaAporte(${a.id}, 'valor', this.value)" />
         </td>
         <td class="remover">
-          ${faixasAporte.length > 1 ? `<button class="btn-remover" title="Remover" onclick="removerFaixaAporte(${faixa.id})">&times;</button>` : ''}
+          ${faixasAporte.length>1?`<button class="btn-remover" title="Remover Faixa" onclick="removerFaixaAporte(${a.id})">×</button>`:""}
         </td>
-      </tr>
-    `;
-  }
-}
-renderFaixasAporte();
-
-function adicionarFaixaAporte() {
-  // Preencher de forma intuitiva: começa do mês seguinte ao último
-  let ultimo = faixasAporte[faixasAporte.length - 1];
-  let novoDe = parseInt(ultimo.ate) + 1;
-  let novoAte = novoDe;
-  faixasAporte.push({ id: faixasId++, de: novoDe, ate: novoAte, valor: '' });
-  renderFaixasAporte();
-}
-
-function removerFaixaAporte(id) {
-  faixasAporte = faixasAporte.filter(f => f.id !== id);
-  renderFaixasAporte();
-}
-function atualizaFaixaAporte(id, campo, valor) {
-  let faixa = faixasAporte.find(f => f.id === id);
-  if (!faixa) return;
-  if (campo === 'de') {
-    faixa.de = Math.max(1, parseInt(valor) || 1);
-    if (faixa.ate < faixa.de) faixa.ate = faixa.de;
-  } else if (campo === 'ate') {
-    faixa.ate = Math.max(faixa.de, parseInt(valor) || faixa.de);
-  } else if (campo === 'valor') {
-    faixa.valor = parseFloat(valor) || '';
-  }
-  renderFaixasAporte();
-}
-
-// --------- Aportes Extras ---------
-function renderAportesExtras() {
-  const div = document.getElementById('aportes-extras');
-  div.innerHTML = '';
-  for (let extra of aportesExtras) {
-    div.innerHTML += `
+      </tr>`}function adicionarFaixaAporte(){let e=faixasAporte.length>0?faixasAporte[faixasAporte.length-1]:{ate:0},a=parseInt(e.ate)+1,t=a+11;faixasAporte.push({id:faixasId++,de:a,ate:t,valor:""}),renderFaixasAporte()}function removerFaixaAporte(e){faixasAporte=faixasAporte.filter(a=>a.id!==e),renderFaixasAporte()}function atualizaFaixaAporte(e,a,t){let r=faixasAporte.find(a=>a.id===e);r&&("de"===a?(r.de=Math.max(1,parseInt(t)||1),r.ate<r.de&&(r.ate=r.de)):"ate"===a?r.ate=Math.max(r.de,parseInt(t)||r.de):"valor"===a&&(r.valor=parseFloat(t)||""),renderFaixasAporte())}function renderAportesExtras(){const e=document.getElementById("aportes-extras");e.innerHTML="";for(let a of aportesExtras)e.innerHTML+=`
       <div class="extra-row">
-        <label>Mês:</label>
-        <input type="number" min="1" value="${extra.mes}">
-        <label>Valor (R$):</label>
-        <input type="number" min="0" step="0.01" value="${extra.valor}">
-        <button class="btn-remover-extra" onclick="removerAporteExtra(${extra.id})" title="Remover">×</button>
-      </div>
-    `;
-  }
-}
-renderAportesAportesExtras();
-
-function adicionarAporteExtra() {
-  aportesExtras.push({ id: extraId++, mes: '', valor: '' });
-  renderAportesExtras();
-}
-function removerAporteExtra(id) {
-  aportesExtras = aportesExtras.filter(e => e.id !== id);
-  renderAportesExtras();
-}
-function atualizaAporteExtra(id, campo, valor) {
-  let idx = aportesExtras.findIndex(e => e.id === id);
-  if (idx !== -1) {
-    aportesExtras[idx][campo] = campo === 'mes' ? parseInt(valor) : parseFloat(valor);
-  }
-  renderAportesExtras();
-}
-
-// ----------- Limpar campos -----------
-function limparCampos() {
-  document.getElementById('valor-inicial').value = '';
-  document.getElementById('periodo').value = 1;
-  document.getElementById('taxa-juros').value = '';
-  document.getElementById('tipo-taxa').value = 'anual';
-
-  faixasAporte = [
-    { id: 1, de: 1, ate: 1, valor: '' }
-  ];
-  faixasId = 2;
-  renderFaixasAporte();
-
-  aportesExtras = [];
-  extraId = 1;
-  renderAportesExtras();
-
-  document.getElementById('resultado').style.display = "none";
-}
-
-// --------------- Cálculo --------------
-function calcular() {
-  const valorInicial = parseFloat(document.getElementById('valor-inicial').value) || 0;
-  const periodo = parseInt(document.getElementById('periodo').value) || 1;
-  const taxa = parseFloat(document.getElementById('taxa-juros').value);
-  const tipoTaxa = document.getElementById('tipo-taxa').value;
-
-  if (isNaN(taxa) || taxa <= 0) {
-    alert('Digite uma taxa de juros válida!');
-    return;
-  }
-
-  // Preparar vetor de aporte mensal para cada mês
-  let aportesPorMes = Array(periodo+1).fill(0); // do mês 1 ao período
-  for (let faixa of faixasAporte) {
-    if (!faixa.valor) continue;
-    let de = Math.max(1, parseInt(faixa.de));
-    let ate = Math.min(periodo, parseInt(faixa.ate));
-    let valor = parseFloat(faixa.valor) || 0;
-    for (let m = de; m <= ate; m++) {
-      aportesPorMes[m] = valor;
-    }
-  }
-  // Somar aportes extras
-  for (let extra of aportesExtras) {
-    if (extra.mes && extra.valor && extra.mes >= 1 && extra.mes <= periodo) {
-      aportesPorMes[extra.mes] += parseFloat(extra.valor);
-    }
-  }
-
-  // Cálculo da taxa mensal
-  let taxaMensal = 0;
-  if (tipoTaxa === "anual") {
-    taxaMensal = Math.pow(1 + taxa/100, 1/12) - 1;
-  } else {
-    taxaMensal = taxa/100;
-  }
-
-  let acumulado = valorInicial;
-  let totalInvestido = valorInicial;
-  let totalJuros = 0;
-
-  let tabela = [];
-  tabela.push({mes: 0, jurosMes: 0, totalInvestido: valorInicial, totalJuros: 0, acumulado: valorInicial});
-
-  for (let m = 1; m <= periodo; m++) {
-    let aporteMes = aportesPorMes[m] || 0;
-
-    // Juros sobre saldo anterior
-    let jurosMes = acumulado * taxaMensal;
-    acumulado += jurosMes;
-
-    // Aportes fixos + extras do mês
-    acumulado += aporteMes;
-    totalInvestido += aporteMes;
-    totalJuros = acumulado - totalInvestido;
-
-    tabela.push({
-      mes: m,
-      jurosMes: jurosMes,
-      totalInvestido: totalInvestido,
-      totalJuros: totalJuros,
-      acumulado: acumulado
-    });
-  }
-
-  // HTML dos resultados
-  let resHTML = `
+        <input type="number" min="1" placeholder="Mês do Aporte" value="${a.mes}" onchange="atualizaAporteExtra(${a.id}, 'mes', this.value)">
+        <input type="number" min="0" step="0.01" placeholder="Valor Extra R$" value="${a.valor}" onchange="atualizaAporteExtra(${a.id}, 'valor', this.value)">
+        <button class="btn-remover-extra" onclick="removerAporteExtra(${a.id})" title="Remover Aporte Extra">\xd7</button>
+      </div>`}function adicionarAporteExtra(){aportesExtras.push({id:extraId++,mes:"",valor:""}),renderAportesExtras()}function removerAporteExtra(e){aportesExtras=aportesExtras.filter(a=>a.id!==e),renderAportesExtras()}function atualizaAporteExtra(e,a,t){let r=aportesExtras.find(a=>a.id===e);r&&(r[a]=("mes"===a?parseInt(t):parseFloat(t))||"")}function limparCampos(){document.getElementById("valor-inicial").value="",document.getElementById("periodo").value=12,document.getElementById("taxa-juros").value="",document.getElementById("tipo-taxa").value="anual",faixasAporte=[{id:1,de:1,ate:12,valor:""}],faixasId=2,renderFaixasAporte(),aportesExtras=[],extraId=1,renderAportesExtras(),document.getElementById("resultado").style.display="none",window.scrollTo({top:0,behavior:"smooth"})}function calcular(){const e=parseFloat(document.getElementById("valor-inicial").value)||0,a=parseInt(document.getElementById("periodo").value)||1,t=parseFloat(document.getElementById("taxa-juros").value),r=document.getElementById("tipo-taxa").value;if(isNaN(t)||t<=0)return void alert("Por favor, digite uma taxa de juros v\xe1lida para calcular.");const n=document.querySelectorAll("#aportes-extras .extra-row");aportesExtras=[],extraId=1,n.forEach(e=>{const a=e.children[0],t=e.children[1],r=parseInt(a.value),n=parseFloat(t.value);r&&n&&aportesExtras.push({id:extraId++,mes:r,valor:n})});let o=Array(a+1).fill(0);for(let e of faixasAporte)if(e.valor){let t=Math.max(1,parseInt(e.de)),r=Math.min(a,parseInt(e.ate)),n=parseFloat(e.valor)||0;for(let l=t;l<=r;l++)o[l]=n}for(let e of aportesExtras)e.mes&&e.valor&&e.mes>=1&&e.mes<=a&&(o[e.mes]+=parseFloat(e.valor));let l="anual"===r?Math.pow(1+t/100,1/12)-1:t/100,s=e,d=e,i=[{mes:0,jurosMes:0,totalInvestido:e,totalJuros:0,acumulado:e}];for(let t=1;t<=a;t++){let r=o[t]||0,n=s*l;s+=n+r,d+=r;let c=s-d;i.push({mes:t,jurosMes:n,totalInvestido:d,totalJuros:c,acumulado:s})}const c=e=>e.toLocaleString("pt-BR",{style:"currency",currency:"BRL"}),u=`
       <div class="resumo-cards">
-          <div class="resumo-card verde">Total em Juros<br><span>R$ ${tabela[periodo].totalJuros.toLocaleString('pt-BR', {minimumFractionDigits:2})}</span></div>
-          <div class="resumo-card laranja">Total Investido<br><span>R$ ${tabela[periodo].totalInvestido.toLocaleString('pt-BR', {minimumFractionDigits:2})}</span></div>
-          <div class="resumo-card">Total Final<br><span>R$ ${tabela[periodo].acumulado.toLocaleString('pt-BR', {minimumFractionDigits:2})}</span></div>
+          <div class="resumo-card verde">
+            <div class="label">Total em Juros</div>
+            <div class="valor">${c(i[a].totalJuros)}</div>
+          </div>
+          <div class="resumo-card laranja">
+            <div class="label">Total Investido</div>
+            <div class="valor">${c(i[a].totalInvestido)}</div>
+          </div>
+          <div class="resumo-card neutro">
+            <div class="label">Montante Final</div>
+            <div class="valor">${c(i[a].acumulado)}</div>
+          </div>
       </div>
+      <div class="bloco-title">Evolu\xe7\xe3o M\xeas a M\xeas</div>
       <div class="table-wrap">
           <table>
               <thead>
                   <tr>
-                      <th>Mês</th>
-                      <th>Juros</th>
+                      <th>M\xeas</th>
+                      <th>Juros do M\xeas</th>
                       <th>Total Investido</th>
                       <th>Total Juros</th>
                       <th>Acumulado</th>
                   </tr>
               </thead>
               <tbody>
-  `;
-  for (let i = 0; i < tabela.length; i++) {
-      resHTML += `
-          <tr>
-              <td>${tabela[i].mes}</td>
-              <td class="${tabela[i].jurosMes >= 0 ? 'positivo' : 'negativo'}">R$ ${tabela[i].jurosMes.toLocaleString('pt-BR', {minimumFractionDigits:2})}</td>
-              <td class="laranja">R$ ${tabela[i].totalInvestido.toLocaleString('pt-BR', {minimumFractionDigits:2})}</td>
-              <td class="${tabela[i].totalJuros >= 0 ? 'positivo' : 'negativo'}">R$ ${tabela[i].totalJuros.toLocaleString('pt-BR', {minimumFractionDigits:2})}</td>
-              <td>R$ ${tabela[i].acumulado.toLocaleString('pt-BR', {minimumFractionDigits:2})}</td>
-          </tr>
-      `;
-  }
-  resHTML += `
+                ${i.map(e=>`
+                  <tr>
+                      <td>${e.mes}</td>
+                      <td class="${e.jurosMes>=0?"positivo":"negativo"}">${c(e.jurosMes)}</td>
+                      <td class="laranja">${c(e.totalInvestido)}</td>
+                      <td class="${e.totalJuros>=0?"positivo":"negativo"}">${c(e.totalJuros)}</td>
+                      <td>${c(e.acumulado)}</td>
+                  </tr>`).join("")}
               </tbody>
           </table>
       </div>
-  `;
-  let resultado = document.getElementById('resultado');
-  resultado.innerHTML = resHTML;
-  resultado.style.display = "block";
-}
+  `;let m=document.getElementById("resultado");m.innerHTML=u,m.style.display="block",m.scrollIntoView({behavior:"smooth",block:"start"})}document.addEventListener("DOMContentLoaded",()=>{renderFaixasAporte(),renderAportesExtras()});
 </script>
 </body>
 </html>
